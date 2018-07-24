@@ -17,7 +17,7 @@ public class App {
 
 
     public static void main(String[] args) throws FileNotFoundException, SQLException, ClassNotFoundException {
-        System.out.println(System.getenv("IP"));
+        System.out.println(System.getenv("IP"));//???
         Yaml yaml = new Yaml();
         URL url = Yaml.class.getClassLoader().getResource("docker-compose.yml");
         int COUNTRY_ID = 0;
@@ -55,7 +55,6 @@ public class App {
                 System.out.println("未读取java配置");
             }
         }
-
         queryCountry(COUNTRY_ID);
         queryCustomer(CUSTOMER_ID);
     }
