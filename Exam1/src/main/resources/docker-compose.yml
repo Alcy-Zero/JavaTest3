@@ -1,31 +1,28 @@
-version: '3'
+version: "3"
 services:
-  mysql:
-      image: mysql:test
-      container_name: mysqlt
-      hostname: mysql
-      ports:
-        - "3306:3306"
-      environment:
-        MYSQL_ROOT_PASSWORD: 123456
-      volumes:
-        - ./mysql/mysql_data:/var/lib/mysql
-        - ./mysql/mysql_db.cnf:/etc/mysql/conf.d/mysql_db.cnf
-      expose:
-        - "3306"
-      environment:
-          IP: 192.168.99.100
-          PORT: 3306
-          DATABASE: sakila
-          USER: root
-          PASSWORD: "123456"
-
-  java:
-      image: jar:test
-      container_name: javat
-      hostname: default
-      depends_on:
-        - "mysql"
-      environment:
-          COUNTRY_ID: 10
-          CUSTOMER_ID: 10
+  mysql3:
+    container_name: mysql3
+    build: ./docker/mysql
+    image: javatest/mysql:1.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      IP: "192.168.99.100"
+      PORT: 3306
+      DATABASE: sakila
+      USER: root
+      PASSWORD: "123456"
+  java3:
+    container_name: java3
+    build: ./docker/java
+    image: javatest/java:1.0
+    depends_on:
+      - mysql3
+    links:
+      - mysql3
+    environment:
+      COUNTRY_ID: 11
+      CUSTOMER_ID: 10
+      MYSQL_IP: 192.168.99.100
+      MYSQL_PORT: 3306

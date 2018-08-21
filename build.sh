@@ -1,9 +1,5 @@
+#!/bin/bash
 
-mvn clean package
-
-docker build -t mysql:test ./docker/mysql/
-docker build -t jar:test .
-
+mvn package
+docker-compose build
 docker-compose up
-
-
